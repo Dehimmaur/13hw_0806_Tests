@@ -63,6 +63,8 @@ public class UserTest {
         assertEquals(email, user.getEmail());
         user.setEmail("pet+er@yahoo.com");
         assertEquals(email, user.getEmail());
+        user.setEmail("pet?er@yahoo.com");
+        assertEquals(email, user.getEmail());
     }
 
 
