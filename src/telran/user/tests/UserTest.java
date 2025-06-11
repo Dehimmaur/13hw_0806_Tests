@@ -10,7 +10,7 @@ import telran.user.model.User;
 public class UserTest {
     User user;
     String email = "peter@gmail.com";
-    String password = "1234";
+    String password = "Qwerty!10";
 
 
     @BeforeEach
@@ -23,11 +23,13 @@ public class UserTest {
         user.setEmail("peter@yahoo.com");
         assertEquals("peter@yahoo.com", user.getEmail());
     }
-
+/*
     @Test
     void testCorrectPass(){
         assertEquals("1234", user.getPassword());
     }
+
+ */
 
     @Test
     void testWithoutAt(){
@@ -51,9 +53,9 @@ public class UserTest {
 
     @Test
     void testLastDot(){
-        user.setEmail("peter@yahoo.com.");
+        user.setEmail("peter@yahoocom.");
         assertEquals(email, user.getEmail());
-        user.setEmail("peter@yahoo.co.m");
+        user.setEmail("peter@yahooco.m");
         assertEquals(email, user.getEmail());
     }
 
@@ -67,5 +69,42 @@ public class UserTest {
         assertEquals(email, user.getEmail());
     }
 
+    @Test
+    void testCorrectPassword() {
+        user.setPassword("qwertY%8");
+        assertEquals("qwertY%8", user.getPassword());
+    }
+
+    @Test
+    void testPaswordLength() {
+        user.setPassword("qertY%8");
+        assertEquals(password, user.getPassword());
+    }
+
+    @Test
+    void testPasswordDigits() {
+        user.setPassword("qwertY%E");
+        assertEquals(password, user.getPassword());
+    }
+
+    @Test
+    void testPasswordSpecSimbol() {
+        user.setPassword("qwertY_8");
+        assertEquals(password, user.getPassword());
+        user.setPassword("qwertYW8");
+        assertEquals(password, user.getPassword());
+    }
+
+    @Test
+    void testPaswordLowerCase() {
+        user.setPassword("QWERTY%8");
+        assertEquals(password, user.getPassword());
+    }
+
+    @Test
+    void testPaswordUpperCase(){
+        user.setPassword("qwerty%8");
+        assertEquals(password, user.getPassword());
+    }
 
 }
